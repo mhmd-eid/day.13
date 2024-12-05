@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+
+    <div>
+        <form class="d-flex" asp-action="Search" asp-controller="YourController" method="get">
+            <input class="form-control me-2"
+                   type="search"
+                   name="name"
+                   placeholder="Search"
+                   aria-label="Search" />
+                   
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+
+    </div>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Movies List</h1>
+        <div class="row">
+            @foreach (var movie in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="~/movies/@movie.ImgUrl" class="img-fluid rounded-start" alt="@movie.Name">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@movie.Name</h5>
+                                    <p class="card-text"><strong>Price:</strong> $@movie.Price.ToString("F2")</p>
+                                    <p class="card-text"><strong>Cinema:</strong> @movie.Cinema.Name</p>
+                                    <p class="card-text">
+                                        <strong>Start Date:</strong> @movie.StartDate.ToString("g")
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>End Date:</strong> @movie.EndDate.ToString("g")
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>Category:</strong>
+                                        <a href="/Home/Show?id=@movie.Category.Id">@movie.Category.Name</a>
+                                    </p>
+                                    <span class="badge bg-primary">@movie.MovieStatus</span>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between">
+                                   
+                                    <a href="/Movie/Index?Id=@movie.Id" class="btn btn-secondary">More Details</a>
+                                    <a href="#" class="btn btn-success">Book Ticket</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
